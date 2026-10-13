@@ -19,7 +19,10 @@
 
 set -e
 
-RAW_URL="https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/block-telemetry.sh"
+# raw.githubusercontent.com is served through a CDN that caches content
+# for a few minutes after a push, so always cache-bust this fetch —
+# otherwise a freshly-pushed fix can silently not apply.
+RAW_URL="https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/block-telemetry.sh?nocache=$(date +%s)"
 DEST="/var/lib/webosbrew/init.d/50-privacy-guard"
 
 mkdir -p /var/lib/webosbrew/init.d
