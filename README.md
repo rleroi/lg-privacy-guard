@@ -94,7 +94,7 @@ Community research (see References) shows the relevant services are
 - Verified: domains resolve to `0.0.0.0`/`::` both immediately after
   running the script and after a full reboot.
 
-## Installation (tested, works)
+## Installation
 
 One-liner (see `install.sh`):
 ```bash
