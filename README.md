@@ -136,3 +136,6 @@ the init.d hook is enough — nothing else to clean up.)
 - webosbrew.org — Homebrew Channel project (the app ecosystem this would
   eventually be distributed through, and whose own `startup.sh` this
   approach piggybacks on).
+- A community-shared NextDNS custom blocklist (found via Reddit, original
+  source/author not tracked down) contributed the `lgtvcommon.com` and
+  related subdomains blocked above.

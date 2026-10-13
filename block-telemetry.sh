@@ -46,7 +46,31 @@ $MARKER
 ::1 attic.lgappstv.com
 127.0.0.1 nvcs.lgsmartad.com
 ::1 nvcs.lgsmartad.com
+127.0.0.1 lgtvcommon.com
+::1 lgtvcommon.com
+127.0.0.1 service.lgtvcommon.com
+::1 service.lgtvcommon.com
+127.0.0.1 recommend.lgtvcommon.com
+::1 recommend.lgtvcommon.com
+127.0.0.1 rdl.lgtvcommon.com
+::1 rdl.lgtvcommon.com
+127.0.0.1 nudge.lgtvcommon.com
+::1 nudge.lgtvcommon.com
+127.0.0.1 homeprv.lgtvcommon.com
+::1 homeprv.lgtvcommon.com
+127.0.0.1 cdpsvc.lgtvcommon.com
+::1 cdpsvc.lgtvcommon.com
+127.0.0.1 cdpbeacon.lgtvcommon.com
+::1 cdpbeacon.lgtvcommon.com
 "
+
+# Note: /etc/hosts has no wildcard support, so the *.lgtvcommon.com /
+# *.lgsmartad.com entries above are listed as explicit known subdomains
+# (sourced from a community NextDNS blocklist) rather than true wildcard
+# blocks. A subdomain not listed here will still resolve normally — this
+# is a real coverage gap compared to a DNS-level wildcard blocker like
+# NextDNS/Pi-hole, which remains the more complete option if you have one
+# available on your network.
 
 # TODO: this list was compiled from one community write-up and manual
 # testing on a single CX unit. It is very likely incomplete. Before this
