@@ -6,23 +6,19 @@
 # immediately.
 #
 # Usage (on the TV, over SSH):
-#   curl -ksL https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/block-telemetry.sh \
-#     -o /var/lib/webosbrew/init.d/50-privacy-guard-tmp \
-#   && mkdir -p /var/lib/webosbrew/init.d \
-#   && mv /var/lib/webosbrew/init.d/50-privacy-guard-tmp /var/lib/webosbrew/init.d/50-privacy-guard \
-#   && chmod +x /var/lib/webosbrew/init.d/50-privacy-guard \
-#   && /var/lib/webosbrew/init.d/50-privacy-guard
+#   curl -ksL https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/install.sh | sh
 #
 # This script exists mainly as documentation of that one-liner; most
-# users will just copy the one-liner above directly rather than fetching
-# this file too.
+# users will just run the one-liner above directly rather than fetching
+# this file separately.
 
 set -e
 
-# raw.githubusercontent.com is served through a CDN that caches content
-# for a few minutes after a push, so always cache-bust this fetch —
-# otherwise a freshly-pushed fix can silently not apply.
-RAW_URL="https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/block-telemetry.sh?nocache=$(date +%s)"
+# Note: raw.githubusercontent.com is served through a CDN with a ~5
+# minute cache, keyed by path only (query-string cache-busting does NOT
+# work here). If you just pushed a change to this repo and are testing
+# immediately, wait a few minutes rather than trying to force a refresh.
+RAW_URL="https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/block-telemetry.sh"
 DEST="/var/lib/webosbrew/init.d/50-privacy-guard"
 
 mkdir -p /var/lib/webosbrew/init.d
