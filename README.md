@@ -10,6 +10,26 @@ on one LG CX (webOS 5.x) unit. Not yet packaged for easy install, not yet
 tested on other models/versions.** Do not distribute this more widely
 until that happens.
 
+## Step 0: get root/elevated shell access first
+
+This repo does nothing on its own — it assumes your TV already has root
+SSH access via one of the community tools below. If you don't have that
+yet, do it first:
+
+1. Check whether your TV's firmware is even exploitable:
+   **[cani.rootmy.tv](https://cani.rootmy.tv/)** — look up your model and
+   webOS version.
+2. If it is, use **[slopbro](https://github.com/throwaway96/slopbro)**
+   to root it and install Homebrew Channel. (This is what was used to
+   develop and test this repo, on an LG CX / webOS 5.x.)
+3. Come back here once you have root SSH working (see the "secure SSH
+   access" section below for one more setup step).
+
+This repo has only been tested on one LG CX (webOS 5.x) unit — it very
+likely works on other webOS 4–11 models/versions too (same general
+system layout), but that's unconfirmed. If you try it on a different
+model/version, please open an issue with the result either way.
+
 ## Goal
 
 One-step installer (ideally a Homebrew Channel app) that:
