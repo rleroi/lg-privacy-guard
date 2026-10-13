@@ -21,6 +21,36 @@ One-step installer (ideally a Homebrew Channel app) that:
 3. Is safe to install/uninstall without any risk of making the TV
    unbootable (worst case is the block not applying, never a broken TV).
 
+## Prerequisite: secure SSH access first
+
+Homebrew Channel ships a well-known default root SSH password (`alpine`)
+until you replace it with key-based auth. If you haven't done this yet,
+do it before anything else:
+
+1. Generate a key pair on your computer if you don't have one:
+   ```bash
+   ssh-keygen -t ed25519 -f ~/.ssh/webos_tv
+   ```
+2. Copy the public key to the TV (you'll be prompted for the default
+   `alpine` password one last time):
+   ```bash
+   ssh-copy-id -i ~/.ssh/webos_tv.pub root@<TV_IP>
+   ```
+   If `ssh-copy-id` isn't available, do it manually:
+   ```bash
+   cat ~/.ssh/webos_tv.pub | ssh root@<TV_IP> "mkdir -p /home/root/.ssh && cat >> /home/root/.ssh/authorized_keys"
+   ```
+3. Reboot the TV. Homebrew's own startup script checks for
+   `/home/root/.ssh/authorized_keys` and automatically skips setting the
+   default password once that file exists — confirmed by reading
+   `/var/lib/webosbrew/startup.sh` directly on-device.
+4. From then on, connect with `ssh -i ~/.ssh/webos_tv root@<TV_IP>`
+   instead of a password.
+
+Note: a plain `passwd` command on the TV won't work — `/etc/shadow` is
+on a read-only overlay, so the only supported way to move off the
+default password is the SSH-key method above.
+
 ## Why this is needed
 
 LG webOS TVs ship with ACR and ad-tracking services enabled by default.
