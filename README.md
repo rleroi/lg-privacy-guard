@@ -1,9 +1,9 @@
 # LG Privacy Guard
 
-A boot-persistent telemetry/ACR blocker for rooted LG webOS TVs, aimed at
-non-technical users who already have elevated system access (e.g. via
-slopbro or dejavuln-autoroot + Homebrew Channel) but don't want to
-hand-edit files over SSH every time.
+A boot-persistent telemetry/ACR blocker for rooted LG webOS TVs. For
+anyone who already has root SSH access (e.g. via slopbro or
+dejavuln-autoroot + Homebrew Channel) and wants a one-line install
+instead of hand-typing the commands over SSH each time.
 
 **Status: core mechanism confirmed working, including boot persistence,
 on one LG CX (webOS 5.x) unit, installed via a one-liner over SSH. Only
