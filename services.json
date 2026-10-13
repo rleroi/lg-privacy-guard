@@ -1,0 +1,6 @@
+{
+  "id": "com.privacyguard.service",
+  "description": "Blocks LG ACR/ad telemetry domains on boot",
+  "engine": "node",
+  "main": "service.js"
+}
