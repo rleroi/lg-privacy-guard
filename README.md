@@ -14,11 +14,14 @@ result either way.
 This repo does nothing on its own — it assumes your TV already has root
 SSH access via one of the community tools below.
 
-1. Check whether your TV's firmware is exploitable:
-   **[cani.rootmy.tv](https://cani.rootmy.tv/)** — look up your model and
-   webOS version.
-2. If it is, use **[slopbro](https://github.com/throwaway96/slopbro)**
-   to root it and install Homebrew Channel.
+1. Check whether your TV's firmware is exploitable and which tool fits
+   it: **[cani.rootmy.tv](https://cani.rootmy.tv/)** — look up your
+   model and webOS version, it'll point you to the right one (e.g.
+   [slopbro](https://github.com/throwaway96/slopbro) or
+   dejavuln-autoroot, depending on your model/firmware).
+2. Use whichever tool it recommends to root the TV and install Homebrew
+   Channel. (This repo itself was developed and tested using slopbro on
+   an LG CX / webOS 5.x — your model may need a different tool.)
 3. Then do the one-time SSH hardening step below before installing this.
 
 ## Step 1: secure SSH access
