@@ -1,4 +1,4 @@
-# LG Privacy Guard (in progress — manual install works, packaging TBD)
+# LG Privacy Guard
 
 A boot-persistent telemetry/ACR blocker for rooted LG webOS TVs, aimed at
 non-technical users who already have elevated system access (e.g. via
@@ -6,10 +6,10 @@ slopbro or dejavuln-autoroot + Homebrew Channel) but don't want to
 hand-edit files over SSH every time.
 
 **Status: core mechanism confirmed working, including boot persistence,
-on one LG CX (webOS 5.x) unit. Not packaged as an installable app yet —
-currently a manual script/one-liner. Only tested on the one unit above;
-other models/versions are untested (see Step 0 below for how to check
-compatibility and report back if you try it).
+on one LG CX (webOS 5.x) unit, installed via a one-liner over SSH. Only
+tested on the one unit above; other models/versions are untested (see
+Step 0 below for how to check compatibility and report back if you try
+it).
 
 ## Step 0: get root/elevated shell access first
 
@@ -33,7 +33,7 @@ model/version, please open an issue with the result either way.
 
 ## Goal
 
-One-step installer (ideally a Homebrew Channel app) that:
+A one-line installer, run once over SSH, that:
 1. Blocks known LG ACR (automatic content recognition) and ad-telemetry
    domains via a hosts-file override. ✅ working
 2. Re-applies that override on every boot (the override does not survive
@@ -94,7 +94,14 @@ Community research (see References) shows the relevant services are
 - Verified: domains resolve to `0.0.0.0`/`::` both immediately after
   running the script and after a full reboot.
 
-## Manual installation (current state — tested, works)
+## Installation (tested, works)
+
+One-liner (see `install.sh`):
+```bash
+curl -ksL https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/install.sh | sh
+```
+
+Or step by step:
 
 ```bash
 # copy the script to the TV
@@ -126,37 +133,26 @@ reboot
 (The hosts override itself lives in a reset-on-boot layer, so removing
 the init.d hook is enough — nothing else to clean up.)
 
-## Open questions / TODO before this goes anywhere near less-technical users
+## Open questions / TODO
 
 - [x] Confirm boot-hook mechanism — it's `/var/lib/webosbrew/init.d/`
       (Homebrew Channel's own `run-parts` extension point), confirmed via
       inspecting `startup.sh` directly on a CX unit.
 - [x] Confirm the hosts-bind-mount approach survives a reboot — confirmed.
+- [x] One-liner installer via SSH — confirmed working.
 - [ ] Verify domain blocklist is current and complete across more
-      models/firmware — currently sourced from one forum write-up plus
-      manual testing on a single CX. Likely incomplete.
-- [ ] Test on at least 2-3 different webOS versions/models before
-      claiming general compatibility.
-- [ ] Decide packaging format: a Homebrew-installable `.ipk` app that
-      drops the init.d script automatically on install (so users never
-      touch SSH) vs. keeping this a manual script repo. The former needs
-      real on-device SDK testing (`ares-package`, `ares-install`) that
-      hasn't been done yet.
-- [ ] Only after the above: look at webosbrew's actual app-catalog
-      contribution process (their own docs/repo, not guessed) for getting
-      this listed so other users can find it.
-- [ ] Write this up in a way that's honest with prospective users about
-      what it does, what it doesn't guarantee, and that it requires the TV
-      to already have elevated system access via one of the known
-      community exploit/installer tools (out of scope for this repo).
+      models/firmware — currently sourced from one forum write-up, a
+      community NextDNS list, plus manual testing on a single CX. Likely
+      incomplete.
+- [ ] Test on other webOS versions/models — only confirmed on LG CX
+      (webOS 5.x) so far.
 
 ## References
 
 - Level1Techs forum: "LG TV Block Mini-How-to" — community write-up this
   approach is based on.
-- webosbrew.org — Homebrew Channel project (the app ecosystem this would
-  eventually be distributed through, and whose own `startup.sh` this
-  approach piggybacks on).
+- webosbrew.org — Homebrew Channel project, whose own `startup.sh` and
+  `init.d` boot-hook mechanism this approach piggybacks on.
 - A community-shared NextDNS custom blocklist (found via Reddit, original
   source/author not tracked down) contributed the `lgtvcommon.com` and
   related subdomains blocked above.
