@@ -6,9 +6,10 @@ slopbro or dejavuln-autoroot + Homebrew Channel) but don't want to
 hand-edit files over SSH every time.
 
 **Status: core mechanism confirmed working, including boot persistence,
-on one LG CX (webOS 5.x) unit. Not yet packaged for easy install, not yet
-tested on other models/versions.** Do not distribute this more widely
-until that happens.
+on one LG CX (webOS 5.x) unit. Not packaged as an installable app yet —
+currently a manual script/one-liner. Only tested on the one unit above;
+other models/versions are untested (see Step 0 below for how to check
+compatibility and report back if you try it).
 
 ## Step 0: get root/elevated shell access first
 
