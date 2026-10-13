@@ -8,6 +8,11 @@
 # Homebrew Channel's official extension point so it re-applies on every
 # boot automatically (see README "Installation" section).
 #
+# Idempotent: safe to run multiple times in the same boot session (e.g.
+# manual testing followed by the init.d hook also firing) without
+# duplicating hosts entries, because /etc/hosts may already be the
+# bind-mounted copy from an earlier run this session.
+#
 # Based on community write-up: Level1Techs "LG TV Block Mini-How-to"
 # (https://forum.level1techs.com/t/lg-tv-block-mini-how-to/255178), and
 # matches the same /etc/hosts bind-mount pattern Homebrew Channel's own
@@ -17,8 +22,10 @@
 # for this script — see README).
 
 HOSTS_FILE="/tmp/hosts.privacy"
+MARKER="# lg-privacy-guard block"
 
 BLOCKLIST="
+$MARKER
 127.0.0.1 ad.lgappstv.com
 ::1 ad.lgappstv.com
 127.0.0.1 us.lgsmartad.com
@@ -43,8 +50,13 @@ BLOCKLIST="
 
 # TODO: this list was compiled from one community write-up and manual
 # testing on a single CX unit. It is very likely incomplete. Before this
-# repo goes public, cross-check against other models/firmware versions
+# repo goes wider, cross-check against other models/firmware versions
 # and any newer community findings.
+
+if grep -qF "$MARKER" /etc/hosts 2>/dev/null; then
+    echo "Privacy block already applied this boot session — skipping."
+    exit 0
+fi
 
 cp /etc/hosts "$HOSTS_FILE"
 echo "$BLOCKLIST" >> "$HOSTS_FILE"
