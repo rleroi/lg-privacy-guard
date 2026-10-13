@@ -72,10 +72,9 @@ $MARKER
 # NextDNS/Pi-hole, which remains the more complete option if you have one
 # available on your network.
 
-# TODO: this list was compiled from one community write-up and manual
-# testing on a single CX unit. It is very likely incomplete. Before this
-# repo goes wider, cross-check against other models/firmware versions
-# and any newer community findings.
+# Note: this list was compiled from one community write-up and manual
+# testing on a single CX unit. It is very likely incomplete — PRs adding
+# verified domains are welcome.
 
 if grep -qF "$MARKER" /etc/hosts 2>/dev/null; then
     echo "Privacy block already applied this boot session — skipping."
