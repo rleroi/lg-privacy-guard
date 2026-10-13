@@ -51,8 +51,11 @@ off the default password.
 
 ## Step 2: install the privacy guard
 
+Run from your computer, no need to open a separate SSH session first —
+replace `<TV_IP>`:
+
 ```bash
-curl -ksL https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/install.sh | sh
+ssh -i ~/.ssh/webos_tv root@<TV_IP> 'curl -ksL https://raw.githubusercontent.com/rleroi/lg-privacy-guard/master/install.sh | sh'
 ```
 
 That's it — it applies immediately and re-applies automatically on every
